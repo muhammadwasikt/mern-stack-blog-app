@@ -6,23 +6,19 @@ import ProfileDropdown from './common/ProfileDropdown';
 
 const Header = ({ dashboard }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const user = useSelector(state => state.user.userId)
   const { name, role } = user
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
 
   const userName = name?.replace('.', '').slice(0, 2).toUpperCase()
 
   return (
     <>
       {dashboard ?
-        <div className="navbar bg-primary justify-between ">
+        <div className="navbar bg-primary justify-between">
           <div className="pl-12 ">
             <a className="text-xl md:hidden md:text-[14px] text-secandory px-2">{role === 'admin' ? 'Admin Dashboard' : 'User Dashboard'}</a>
           </div>
@@ -62,54 +58,34 @@ const Header = ({ dashboard }) => {
               </div>
             </button>
           </div>
-          <ProfileDropdown userName={userName} role={role} />
+          <ProfileDropdown userName={userName} />
         </div>
         :
-        <nav className="bg-primary text-secandory shadow-md">
+        <nav className="bg-primary text-secandory shadow-md sm:px-4">
           <div className="px-3 py-4 flex items-center justify-between gap-3 w-full">
             {/* Hamburger menu for mobile */}
             <div className="flex gap-3">
               <div className="md:hidden flex items-center">
                 <button
                   onClick={toggleMenu}
-                  className="text-secandory focus:outline-none"
+                  className="btn p-2"
                   aria-label="Toggle Menu"
                 >
                   <div className={`space-y-2`}>
-                    <span className={`block w-6 h-0.5 bg-secandory transition-transform duration-300 ${isMenuOpen ? 'rotate-45 translate-y-[10px]' : ''}`}></span>
-                    <span className={`block w-6 h-0.5 bg-secandory transition-opacity duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-                    <span className={`block w-6 h-0.5 bg-secandory transition-transform duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-[10px]' : ''}`}></span>
+                    <span className={`block w-6 h-0.5 bg-black transition-transform duration-300 ${isMenuOpen ? 'rotate-45 translate-y-[10px]' : ''}`}></span>
+                    <span className={`block w-6 h-0.5 bg-black transition-opacity duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
+                    <span className={`block w-6 h-0.5 bg-black transition-transform duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-[10px]' : ''}`}></span>
                   </div>
                 </button>
               </div>
               <div className="flex items-center space-x-4">
-                <Link to="/all-blogs" className="text-3xl font-bold text-secandory flex flex-col">BLOG <span className='text-sm font-light tracking-[6px] px-1'>buster</span></Link>
+                <Link to="/" className="max-sm:text-lg text-3xl font-bold text-secandory flex flex-col">BLOG <span className='text-sm font-light tracking-[6px] max-sm:tracking-[2px] px-1 max-sm:px-0'>buster</span></Link>
               </div>
             </div>
             <div className="hidden md:flex space-x-6 items-center">
               <Link to="/" className="hover:text-indigo-300">Home</Link>
+              <Link to="/blog-list" className="hover:text-indigo-300">Blogs</Link>
               <Link to="/about" className="hover:text-indigo-300">About</Link>
-
-              {/* Categories Dropdown */}
-              <div className="relative">
-                <button
-                  onClick={toggleDropdown}
-                  className="hover:text-indigo-300"
-                >
-                  Categories
-                </button>
-
-                {isDropdownOpen && (
-                  <div className="absolute bg-blue-500 text-secandory shadow-lg rounded-md mt-2 w-48">
-                    <Link to="#" className="block px-4 py-2 hover:bg-blue-700">Technology</Link>
-                    <Link to="#" className="block px-4 py-2 hover:bg-blue-700">Lifestyle</Link>
-                    <Link to="#" className="block px-4 py-2 hover:bg-blue-700">Education</Link>
-                    <Link to="#" className="block px-4 py-2 hover:bg-blue-700">Health</Link>
-                  </div>
-                )}
-              </div>
-
-              <Link to="/all-blogs" className="hover:text-indigo-300">Blog</Link>
               <Link to="/contact" className="hover:text-indigo-300">Contact</Link>
 
             </div>
@@ -120,10 +96,10 @@ const Header = ({ dashboard }) => {
                 <RiSearch2Line />
               </button>
             </div>
-            <div>
+            <div className={`${!user && 'max-mobile:hidden'}`}>
               {user ?
-                <ProfileDropdown userName={userName} role={role} /> :
-                <Link to='/auth/sign-in' className='btn'>
+                <ProfileDropdown userName={userName} /> :
+                <Link to='/auth/sign-in' className='btn max-mobile:hidden'>
                   Sign in
                 </Link>
               }
@@ -133,30 +109,11 @@ const Header = ({ dashboard }) => {
           {isMenuOpen && <div
             className={'bg-blue-500 p-4 space-y-4 '}
           >
-            <Link to="/" className="block text-secandory hover:text-indigo-300">Home</Link>
-            <Link to="/about" className="block text-secandory hover:text-indigo-300">About</Link>
-
-            {/* Categories Dropdown for Mobile */}
-            <div className="relative">
-              <button
-                onClick={toggleDropdown}
-                className="block w-full text-left py-2"
-              >
-                Categories
-              </button>
-
-              {isDropdownOpen && (
-                <div className="bg-blue-500 text-secandory w-full mt-2">
-                  <Link to="#" className="block px-4 py-2 hover:bg-blue-700">Technology</Link>
-                  <Link to="#" className="block px-4 py-2 hover:bg-blue-700">Lifestyle</Link>
-                  <Link to="#" className="block px-4 py-2 hover:bg-blue-700">Education</Link>
-                  <Link to="#" className="block px-4 py-2 hover:bg-blue-700">Health</Link>
-                </div>
-              )}
-            </div>
-
-            <Link to="/all-blog" className="block text-secandory hover:text-indigo-300">Blog</Link>
-            <Link to="/contact" className="block text-secandory hover:text-indigo-300">Contact</Link>
+            <Link to="/" className="block text-secandory hover:text-indigo-300" onClick={() => setIsMenuOpen(false)}>Home</Link>
+            <Link to="/blog-list" className="block text-secandory hover:text-indigo-300" onClick={() => setIsMenuOpen(false)}>Blogs</Link>
+            <Link to="/about" className="block text-secandory hover:text-indigo-300" onClick={() => setIsMenuOpen(false)}>About</Link>
+            <Link to="/contact" className="block text-secandory hover:text-indigo-300" onClick={() => setIsMenuOpen(false)}>Contact</Link>
+            {!user && <Link to="/auth/sign-in" className="hidden max-mobile:flex text-secandory hover:text-indigo-300" onClick={() => setIsMenuOpen(false)}>Sign In</Link>}
           </div>}
         </nav>}
     </>

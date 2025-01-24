@@ -5,18 +5,18 @@ import ResendOtp from "../Auth/ResendOtp";
 import ResetPassword from "../Auth/ResetPassword";
 import SignIn from "../Auth/SignIn";
 import SignUp from "../Auth/SignUp";
-import AdminDashboard from "../dashboards/AdminDashboard";
+import Dashboard from "../dashboards/Dashboard";
 import About from "../pages/About";
 import AppLayout from "../pages/AppLayout";
-import BlogForm from "../pages/BlogForm";
-import BlogList from "../pages/BlogList";
 import Home from "../pages/Home";
 import DashboardLayout from "../dashboards/DashboardLayout";
-import UserDashboard from "../dashboards/UserDashboard";
-import UsersList from "../pages/UsersList";
 import Contact from "../pages/Contact";
 import MainLayout from "../pages/MainLayout";
-import BlogDetailModal from "../components/common/BlogDetailModal";
+import BlogDetailModal from "../components/common/BlogDetail";
+import BlogForm from "../dashboards/BlogForm";
+import UsersList from "../dashboards/UsersList";
+import BlogList from "../dashboards/BlogList";
+import OwnBlogs from "../dashboards/OwnBlogs";
 
 const routes = [
     {
@@ -32,10 +32,6 @@ const routes = [
                         element: <Home />
                     },
                     {
-                        path: '/all-blogs',
-                        element: <BlogList />
-                    },
-                    {
                         path: '/about',
                         element: <About />
                     },
@@ -44,9 +40,14 @@ const routes = [
                         element: <Contact />
                     },
                     {
+                        path: '/blog-list',
+                        element: <BlogList />
+                    },
+                    {
                         path: '/blog-detail/:id',
                         element: <BlogDetailModal />
                     },
+                    
                 ]
             },
             {
@@ -54,20 +55,32 @@ const routes = [
                 element: <DashboardLayout />,
                 children: [
                     {
-                        path: '/auth/admin',
-                        element: <AdminDashboard />
+                        path: '/auth/dashboard',
+                        element: <Dashboard />
                     },
                     {
-                        path: '/auth/user',
-                        element: <UserDashboard />
+                        path: '/blog/add',
+                        element: <BlogForm />
                     },
                     {
-                        path: '/blog/:type',
+                        path: '/blog/update/:id',
                         element: <BlogForm />
                     },
                     {
                         path: '/all-users',
                         element: <UsersList />
+                    },
+                    {
+                        path: '/auth/blog-detail/:id',
+                        element: <BlogDetailModal />
+                    },
+                    {
+                        path: '/my-blogs',
+                        element: <OwnBlogs />
+                    },
+                    {
+                        path: '/blogs-list',
+                        element: <BlogList />
                     },
                 ]
             },

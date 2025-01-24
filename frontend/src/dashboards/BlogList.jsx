@@ -3,22 +3,19 @@ import { useSelector } from "react-redux";
 import Card from "../components/common/Card";
 
 const BlogList = () => {
-  // Fetch blogs from Redux store
+
   const blogs = useSelector((state) => state.blog.blogs);
+  const user = useSelector((state) => state.user.userId);
 
-  // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const blogsPerPage = 5; // Number of blogs per page
+  const blogsPerPage = 5;
 
-  // Calculate the current blogs to display
   const indexOfLastBlog = currentPage * blogsPerPage;
   const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
   const currentBlogs = blogs?.slice(indexOfFirstBlog, indexOfLastBlog);
 
-  // Total pages
   const totalPages = Math.ceil(blogs?.length / blogsPerPage);
 
-  // Handle page change
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -26,11 +23,16 @@ const BlogList = () => {
   return (
     <div className="bg-base-100 text-base-content py-10 px-10">
       <div className="text-center mb-10">
-        <h1 className="text-4xl font-bold pb-2">Our Blogs</h1>
-        <p className="text-gray-600 text-lg">
-          Explore our latest blog posts and stay updated with the newest trends
-          in web development.
-        </p>
+        {user?.role === 'user' ?
+          <>
+            <h1 className="text-4xl font-bold pb-2">Our Blogs</h1>
+            <p className="text-gray-600 text-lg">
+              Explore our latest blog posts and stay updated with the newest trends
+              in web development.
+            </p>
+          </> :
+          <h1 className="text-4xl font-bold pb-2">BLOGS LIST</h1>
+        }
       </div>
 
       {/* Blog Cards */}
@@ -43,7 +45,8 @@ const BlogList = () => {
             category={data?.category}
             title={data?.title}
             id={data?._id}
-            admin
+            admin={user?.role === "admin"}
+            path='blog-detail'
           />
         ))}
       </div>

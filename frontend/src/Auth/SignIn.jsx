@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form"
-import { getReq, postReq } from "../api/axios"
+import { postReq } from "../api/axios"
 import { Link, useNavigate } from "react-router"
-import { useDispatch } from 'react-redux'
-import { userId, userToken } from "../redux/reducers/userSlice"
-import { useState } from "react"
+import { useDispatch , useSelector } from 'react-redux'
+import { userToken } from "../redux/reducers/userSlice"
+import { useState , useEffect } from "react"
 
 
 const SignIn = () => {
@@ -17,6 +17,7 @@ const SignIn = () => {
 
     const [isPassword, setIsPassword] = useState(false)
     const [loader, setLoader] = useState(false)
+    const user = useSelector(state => state.user.userId);
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -24,24 +25,26 @@ const SignIn = () => {
 
     const onSubmit = async (data) => {
         setLoader(true)
-        try {
-            const response = await postReq('/user/login', data)
-            if (response) {
-                dispatch(userToken(response))
-                navigate('/')
-                setLoader(false)
-                reset()
-            }
-        }
-        catch (error) {
+        const response = await postReq('/user/login', data)
+        if (response) {
+            dispatch(userToken(response))
             setLoader(false)
+            navigate('/')
             reset()
+        } else {
+            setLoader(false)
         }
     }
 
     const handleTogglePassword = () => {
         setIsPassword(!isPassword)
     }
+
+    useEffect(() => {
+        if (user) {
+            navigate('/')
+        }
+    })
 
     return (
         <div className="w-full h-screen flex justify-center items-center p-2">
@@ -79,7 +82,7 @@ const SignIn = () => {
 
                 <Link to='/forgot-password' className="text-sm text-blue-600 hover:underline text-right" >Forgot Password</Link>
 
-                <button type="submit" className="btn w-full py-3 bg-primary text-secandory">{loader ? 'Loading...':'SIGN IN'}</button>
+                <button type="submit" className="btn w-full py-3 bg-primary text-secandory">{loader ? 'Loading...' : 'SIGN IN'}</button>
                 <p className="text-center mt-4 flex justify-center gap-1 text-sm items-center">Don't have an account: <span className="text-blue-500 cursor-pointer text-[16px]" onClick={() => navigate('/auth/sign-up')}>Sign Up</span></p>
             </form>
         </div>

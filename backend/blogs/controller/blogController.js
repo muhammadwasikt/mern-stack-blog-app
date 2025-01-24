@@ -16,24 +16,28 @@ const getBlog = async (req, res) => {
 
 const addBlog = async (req, res) => {
     try {
-        const path = req.file.path
+        console.log(req.file);  
         
-        if (!path || !req.file) {
+        // Check if file exists
+        if (!req.file) {
             return res.status(400).send({ message: "Please upload a file" });
         }
+
         const { title, description, category, author } = req.body;
+        const path = req.file.path; 
         const response = await Blog.create({
             title,
             description,
             category,
-            file: path,
+            file: path,  
             author,
-        })
-        res.status(201).send({ status: 201, message: "Blog added successfully", data: response })
+        });
+
+        res.status(201).send({ status: 201, message: "Blog added successfully", data: response });
     } catch (error) {
-        return res.send(error.message)
+        // return res.status(500).send({ message: error.message });
     }
-}
+};
 
 const deleteAllBlogs = async (req, res) => {
     try {

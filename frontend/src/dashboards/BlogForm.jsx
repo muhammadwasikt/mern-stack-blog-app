@@ -5,10 +5,10 @@ import { postReq } from "../api/axios";
 import { useSelector } from "react-redux";
 
 
-const BlogForm = ({id}) => {
+const BlogForm = () => {
 
   const [image, setImages] = useState();
-  const [loader , setLoader] = useState(false)
+  const [loader, setLoader] = useState(false)
   const {
     register,
     handleSubmit,
@@ -21,27 +21,27 @@ const BlogForm = ({id}) => {
 
   const onSubmit = async (data) => {
     setLoader(true)
-    const formData = new FormData();      
+    const formData = new FormData();
     formData.append("file", image);
     formData.append("title", data.title);
     formData.append("description", data.description);
     formData.append("category", data.category);
-    formData.append("author", users.name); 
+    formData.append("author", users.name);
 
-    const response = await postReq("/blog/add", formData ,{
+    const response = await postReq("/blog/add", formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
-        },
+      }
     });
     if (response) {
       setLoader(false)
       setImages('')
       reset()
-    }else{
+    } else {
       setLoader(false)
-      setImages('')
-      reset() 
     }
+    console.log(response)
+
   };
 
   const handleEditorChange = (content) => {
@@ -50,10 +50,8 @@ const BlogForm = ({id}) => {
 
   const handleFileChange = async (e) => {
     const files = e.target.files[0];
-    setImages(files); 
+    setImages(files);
   };
-
-
 
   return (
     <div className="max-w-5xl mx-auto px-8 pb-4 bg-white shadow-lg rounded-lg mt-10">
@@ -80,19 +78,23 @@ const BlogForm = ({id}) => {
             Blog Content
           </label>
           <div className="h-[350px]">
-          {Editor ? <Editor
-            apiKey="98tduxzg9w3gyi7ew9b0pllr4niish9xkkc8e5iis76dt2mp"
-            id="description"
-            init={{
-              height: 350,
-            }}
-            onEditorChange={handleEditorChange}
-            value={getValues("description") || ""}
-          /> : <p>Loading...</p>}
-          <input
-            type="hidden"
-            {...register("description", { required: "Description is required" })}
-          />
+            {!Editor ? (
+              <p>Loading...</p>
+            ) : (
+              <Editor
+                apiKey={import.meta.env.VITE_EDITOR_API}
+                id="description"
+                init={{
+                  height: 350,
+                }}
+                onEditorChange={handleEditorChange}
+                value={getValues("description") || ""}
+              />
+            )}
+            <input
+              type="hidden"
+              {...register("description", { required: "Description is required" })}
+            />
           </div>
           {errors.description && (
             <p className="text-red-500 text-sm mt-1">{errors.description.message}</p>
@@ -106,19 +108,19 @@ const BlogForm = ({id}) => {
           </label>
           <div className="flex gap-2 p-2 w-full border rounded-md justify-between">
             <div>
-            <input
-              id="image"
-              type="file"
-              accept="image/*"
-              multiple
-              className="file-input"
-              {...register("file", { required: "Image is required" })}
-              onChange={handleFileChange}
-            />
-            {errors.file && <p className="text-red-500 text-sm mt-1">{errors.file.message}</p>}
+              <input
+                id="image"
+                type="file"
+                accept="image/*"
+                multiple
+                className="file-input"
+                {...register("file", { required: "Image is required" })}
+                onChange={handleFileChange}
+              />
+              {errors.file && <p className="text-red-500 text-sm mt-1">{errors.file.message}</p>}
             </div>
             <div className="h-[50px]">
-              {image && <img src={URL.createObjectURL(image)} className="h-[50px] object-contain"/>}
+              {image && <img src={URL.createObjectURL(image)} className="h-[50px] object-contain" />}
             </div>
           </div>
         </div>
@@ -128,7 +130,7 @@ const BlogForm = ({id}) => {
           <label htmlFor="category" className="block text-lg font-medium text-gray-700 mb-2">
             Select Category
           </label>
-          <input id="category" type="text" className="input w-full input-bordered" placeholder="Category" {...register("category", { required: "Category is required" })}/>
+          <input id="category" type="text" className="input w-full input-bordered" placeholder="Category" {...register("category", { required: "Category is required" })} />
           {errors.category && (
             <p className="text-red-500 text-sm mt-1">{errors.category.message}</p>
           )}

@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form"
 import { postReq } from "../api/axios"
 import { useNavigate } from "react-router"
 import { useSelector } from "react-redux"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 
 
@@ -18,16 +18,18 @@ const SignUp = () => {
 
     const navigate = useNavigate()
     const user = useSelector(state => state.user.userId)
+    const [loading, setLoading] = useState(false)
 
     const onSubmit = async (data) => {
-
+        setLoading(true)
         const response = await postReq('/user/register', data)
-        
-        reset()
         if (response) {
             navigate(`/email-verification/${response.verificationToken}`)
+            setLoading(false)
+            reset()
+        } else {
+            setLoading(false)
         }
-
     }
 
     useEffect(() => {
@@ -81,7 +83,7 @@ const SignUp = () => {
                 </label>
                 {errors.password && <span>This field is required</span>}
 
-                <button type="submit" className="btn w-full py-3 bg-primary text-secandory">SIGN UP</button>
+                <button type="submit" className="btn w-full py-3 bg-primary text-secandory">{loading ? 'Loading...':'SIGN UP'}</button>
                 <p className="text-center mt-4 flex justify-center gap-1 text-sm items-center">Already have an account? <span className="text-blue-500 cursor-pointer text-[16px]" onClick={() => navigate('/auth/sign-in')}>Sign In</span></p>
             </form>
         </div>

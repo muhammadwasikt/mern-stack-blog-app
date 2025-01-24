@@ -15,7 +15,9 @@ const getReq = async (path) => {
 const postReq = async (path , data , form) => {
     try {
         const response = await apiClient.post(path , data ,form)
-        toast.success(response?.data.message)
+        if (response?.data.message) {
+            toast.success(response?.data.message)            
+        }
         return response.data.data;
     } catch (error) {
         console.error(`Error fetching data: ${error.message}`);

@@ -22,17 +22,19 @@ const MainLayout = () => {
         const userResponse = await getReq('/user/protected-route')
         dispatch(userId(userResponse));
     }
+    
 
     useEffect(() => {
         getAllUsers();
         getBlogs();
-        if (token.length > 0 || token ) {
+        if (token?.length > 0 || token ) {
             getUserDetail()
         }
-    }, [])
+    }, [token])
+    
     return (
         <div>
-            <Outlet />
+            <Outlet /> 
         </div>
     )
 }

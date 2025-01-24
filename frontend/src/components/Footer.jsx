@@ -55,7 +55,7 @@ const Footer = () => {
           <div className="space-y-6">
             <h3 className="text-3xl font-bold text-gray-200">Subscribe to Our Newsletter</h3>
             <p className="text-sm text-secandory">Get the latest posts and updates directly in your inbox.</p>
-            <div className="flex gap-2">
+            <div className="flex gap-2 max-mobile:flex-col">
               <input
                 type="email"
                 placeholder="Your email address"

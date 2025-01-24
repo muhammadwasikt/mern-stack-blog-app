@@ -110,7 +110,6 @@ const login = async (req, res) => {
 
         const existingUser = await User.findOne({ email });
 
-
         if (!existingUser) {
             return res.status(404).send({ status: 404, message: "User not found" })
         }

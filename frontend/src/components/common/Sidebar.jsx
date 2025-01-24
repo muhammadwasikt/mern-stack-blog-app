@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router";
 const Sidebar = () => {
     const [isMobile, setIsMobile] = useState(false);
     const user = useSelector(state => state.user.userId)
-    const { name, role } = user
+    const { role } = user
     useEffect(() => {
         if (window.innerWidth < 768) {
             setIsMobile(true)
@@ -17,11 +17,7 @@ const Sidebar = () => {
     const navigate = useNavigate()
 
     const handleNavigate = () => {
-        if (role === 'admin') {
-            navigate('/auth/admin')
-        } else {
-            navigate('/auth/user')
-        }
+        navigate('/auth/dashboard')
     }
     return (
         <div>
@@ -46,6 +42,14 @@ const Sidebar = () => {
                             {role === 'admin' && <li className="hover:bg-secandory hover:text-black w-full rounded-xl"><label htmlFor="my-drawer" aria-label="close sidebar" onClick={() => navigate('/all-users')}>
                                 Users List
                             </label></li>}
+                            {role === 'user' ? <li className="hover:bg-secandory hover:text-black w-full rounded-xl"><label htmlFor="my-drawer" aria-label="close sidebar" onClick={() => navigate('/my-blogs')}>
+                                My Blogs
+                            </label></li>
+                                :
+                                <li className="hover:bg-secandory hover:text-black w-full rounded-xl"><label htmlFor="my-drawer" aria-label="close sidebar" onClick={() => navigate('/blogs-list')}>
+                                    All Blogs
+                                </label></li>
+                            }
                             <li className="hover:bg-secandory hover:text-black w-full rounded-xl"><Link to='/'>Back To Home</Link></li>
                         </ul>
                     </div>
@@ -57,9 +61,17 @@ const Sidebar = () => {
                     </div>
                     <ul className="menu bg-primary text-secandory min-h-screen w-60 p-4">
                         {/* Sidebar content here */}
-                        <li className="hover:bg-secandory hover:text-black w-full rounded-xl"><Link to={role === 'admin' ? '/auth/admin' : '/auth/user'}>Dashboard</Link></li>
+                        <li className="hover:bg-secandory hover:text-black w-full rounded-xl"><Link to='/auth/dashboard'>Dashboard</Link></li>
                         <li className="hover:bg-secandory hover:text-black w-full rounded-xl"><Link to='/blog/add'>Add New Blog</Link></li>
                         {role === 'admin' && <li className="hover:bg-secandory hover:text-black w-full rounded-xl"><Link to='/all-users'>Users List</Link></li>}
+                        {role === 'user' ? <li className="hover:bg-secandory hover:text-black w-full rounded-xl"><label htmlFor="my-drawer" aria-label="close sidebar" onClick={() => navigate('/my-blogs')}>
+                            My Blogs
+                        </label></li>
+                            :
+                            <li className="hover:bg-secandory hover:text-black w-full rounded-xl"><label htmlFor="my-drawer" aria-label="close sidebar" onClick={() => navigate('/blogs-list')}>
+                                All Blogs
+                            </label></li>
+                        }
                         <li className="hover:bg-secandory hover:text-black w-full rounded-xl"><Link to='/'>Back To Home</Link></li>
                     </ul>
                 </div>}

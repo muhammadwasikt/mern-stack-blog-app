@@ -13,7 +13,7 @@ const storage = new CloudinaryStorage({
     } else {
       folder = "uploads/images";
     }
-
+    
     return {
       folder,
       resource_type: "auto",
@@ -22,4 +22,4 @@ const storage = new CloudinaryStorage({
   allowedFormats: ['jpg', 'png', 'jpeg', 'pdf'],
 });
 
-export const upload = multer({ storage });
+export const upload = multer({ storage })
