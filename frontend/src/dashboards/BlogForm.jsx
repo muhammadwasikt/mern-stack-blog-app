@@ -77,7 +77,7 @@ const BlogForm = () => {
           <label htmlFor="description" className="block text-lg font-medium text-gray-700 mb-2">
             Blog Content
           </label>
-          <div className="h-[350px]">
+          <div className="h-[350px] border rounded-xl">
             {!Editor ? (
               <p>Loading...</p>
             ) : (
