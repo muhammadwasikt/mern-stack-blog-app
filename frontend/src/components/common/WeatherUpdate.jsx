@@ -22,13 +22,13 @@ const WeatherUpdate = () => {
   }
   const fetchWeatherData = async (latitude, longitude) => {
     const response = await postReq('/weather/update', { latitude: latitude, longitude: longitude })
-    if (response.ok) {
+    if (response) {
       setResponse(response);      
     }
   }
   return (
     <>
-      {response?.ok && <div className="flex flex-wrap md:flex-row items-center md:justify-between justify-center p-4 border gap-8">
+      {response && <div className="flex flex-wrap md:flex-row items-center md:justify-between justify-center p-4 border gap-8">
         {/* Location Info */}
         <div className="text-center md:text-left">
           <h1 className="text-3xl font-bold text-primary">
