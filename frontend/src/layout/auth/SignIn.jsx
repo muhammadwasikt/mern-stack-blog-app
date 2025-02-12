@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form"
-import { postReq } from "../api/axios"
+import { postReq } from "../../api/axios"
 import { Link, useNavigate } from "react-router"
 import { useDispatch , useSelector } from 'react-redux'
-import { userToken } from "../redux/reducers/userSlice"
+import { userToken } from "../../redux/reducers/userSlice"
 import { useState , useEffect } from "react"
 
 

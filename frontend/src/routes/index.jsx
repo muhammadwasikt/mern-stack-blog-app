@@ -1,122 +1,119 @@
-import EmailCheckPage from "../Auth/EmailCheck";
-import ForgotPassword from "../Auth/ForgotPassword";
-import OTPVerification from "../Auth/OtpVerification";
-import ResendOtp from "../Auth/ResendOtp";
-import ResetPassword from "../Auth/ResetPassword";
-import SignIn from "../Auth/SignIn";
-import SignUp from "../Auth/SignUp";
-import Dashboard from "../dashboards/Dashboard";
-import About from "../pages/About";
-import AppLayout from "../pages/AppLayout";
-import Home from "../pages/Home";
-import DashboardLayout from "../dashboards/DashboardLayout";
-import Contact from "../pages/Contact";
-import MainLayout from "../pages/MainLayout";
+import AppLayout from "../layout/pages/AppLayout";
+import Home from "../layout/pages/Home";
+import About from "../layout/pages/About";
+import Contact from "../layout/pages/Contact";
+import BlogList from "../layout/auth/dashboards/BlogList";
 import BlogDetailModal from "../components/common/BlogDetail";
-import BlogForm from "../dashboards/BlogForm";
-import UsersList from "../dashboards/UsersList";
-import BlogList from "../dashboards/BlogList";
-import OwnBlogs from "../dashboards/OwnBlogs";
+import DashboardLayout from "../layout/auth/dashboards/DashboardLayout";
+import Dashboard from "../layout/auth/dashboards/Dashboard";
+import BlogForm from "../layout/auth/dashboards/BlogForm";
+import UsersList from "../layout/auth/dashboards/UsersList";
+import OwnBlogs from "../layout/auth/dashboards/OwnBlogs";
+import SignIn from "../layout/Auth/SignIn";
+import SignUp from "../layout/Auth/SignUp";
+import ForgotPassword from "../layout/auth/ForgotPassword";
+import ResetPassword from "../layout/auth/ResetPassword";
+import EmailCheckPage from "../layout/auth/EmailCheck";
+import OTPVerification from "../layout/auth/OtpVerification";
+import ResendOtp from "../layout/auth/ResendOtp";
+import NotFound from "../components/common/NotFound";
+
+
+
 
 const routes = [
     {
         path: '/',
-        element: <MainLayout />,
+        element: <AppLayout />,
         children: [
             {
                 path: '/',
-                element: <AppLayout />,
-                children: [
-                    {
-                        path: '/',
-                        element: <Home />
-                    },
-                    {
-                        path: '/about',
-                        element: <About />
-                    },
-                    {
-                        path: '/contact',
-                        element: <Contact />
-                    },
-                    {
-                        path: '/blog-list',
-                        element: <BlogList />
-                    },
-                    {
-                        path: '/blog-detail/:id',
-                        element: <BlogDetailModal />
-                    },
-                    
-                ]
+                element: <Home />
             },
             {
-                path: '/',
-                element: <DashboardLayout />,
-                children: [
-                    {
-                        path: '/auth/dashboard',
-                        element: <Dashboard />
-                    },
-                    {
-                        path: '/blog/add',
-                        element: <BlogForm />
-                    },
-                    {
-                        path: '/blog/update/:id',
-                        element: <BlogForm />
-                    },
-                    {
-                        path: '/all-users',
-                        element: <UsersList />
-                    },
-                    {
-                        path: '/auth/blog-detail/:id',
-                        element: <BlogDetailModal />
-                    },
-                    {
-                        path: '/my-blogs',
-                        element: <OwnBlogs />
-                    },
-                    {
-                        path: '/blogs-list',
-                        element: <BlogList />
-                    },
-                ]
+                path: '/about',
+                element: <About />
             },
             {
-                path: '/auth/sign-in',
-                element: <SignIn />
+                path: '/contact',
+                element: <Contact />
             },
             {
-                path: '/auth/sign-up',
-                element: <SignUp />
+                path: '/blog-list',
+                element: <BlogList />
             },
             {
-                path: '/forgot-password',
-                element: <ForgotPassword />
+                path: '/blog-detail/:id',
+                element: <BlogDetailModal />
             },
-            {
-                path: '/reset-password/:token',
-                element: <ResetPassword />
-            },
-            {
-                path: '/password-reset-email',
-                element: <EmailCheckPage />
-            },
-            {
-                path: '/email-verification/:token',
-                element: <OTPVerification />
-            },
-            {
-                path: '/resend-otp',
-                element: <ResendOtp />
-            }
+
         ]
     },
     {
+        path: '/',
+        element: <DashboardLayout />,
+        children: [
+            {
+                path: '/auth/dashboard',
+                element: <Dashboard />
+            },
+            {
+                path: '/blog/add',
+                element: <BlogForm />
+            },
+            {
+                path: '/blog/update/:id',
+                element: <BlogForm />
+            },
+            {
+                path: '/all-users',
+                element: <UsersList />
+            },
+            {
+                path: '/auth/blog-detail/:id',
+                element: <BlogDetailModal />
+            },
+            {
+                path: '/my-blogs',
+                element: <OwnBlogs />
+            },
+            {
+                path: '/blogs-list',
+                element: <BlogList />
+            },
+        ]
+    },
+    {
+        path: '/auth/sign-in',
+        element: <SignIn />
+    },
+    {
+        path: '/auth/sign-up',
+        element: <SignUp />
+    },
+    {
+        path: '/forgot-password',
+        element: <ForgotPassword />
+    },
+    {
+        path: '/reset-password/:token',
+        element: <ResetPassword />
+    },
+    {
+        path: '/password-reset-email',
+        element: <EmailCheckPage />
+    },
+    {
+        path: '/email-verification/:token',
+        element: <OTPVerification />
+    },
+    {
+        path: '/resend-otp',
+        element: <ResendOtp />
+    },
+    {
         path: '*',
-        element: <h1>Page Not Found</h1>
+        element: <NotFound />
     }
 
 ]

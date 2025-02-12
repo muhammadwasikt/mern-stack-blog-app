@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { postReq } from "../api/axios";
+import { postReq } from "../../api/axios";
 import { useNavigate, useParams } from "react-router";
 
 const ResetPassword = () => {

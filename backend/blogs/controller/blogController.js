@@ -39,6 +39,19 @@ const addBlog = async (req, res) => {
     }
 };
 
+const deleteBlog = async (req, res) => {
+    try {
+        const { id } = req.params
+        const blog = await Blog.findByIdAndDelete(id);
+        if (!blog) {
+            return res.status(404).send({ status: 404, message: "Blog not found" })
+        };
+        res.status(200).send({ status: 200, message: "blog deleted successfully", data: blog })
+    } catch (error) {
+        return res.status(error.status).send({ status: error.status, message: error.message })
+    }
+}
+
 const deleteAllBlogs = async (req, res) => {
     try {
         await Blog.deleteMany({});
@@ -52,4 +65,4 @@ const deleteAllBlogs = async (req, res) => {
 
 
 
-export { getBlog, addBlog, deleteAllBlogs }
+export { getBlog, addBlog, deleteAllBlogs , deleteBlog }

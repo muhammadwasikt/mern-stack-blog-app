@@ -1,6 +1,6 @@
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate, useParams } from "react-router";
-import { postReq } from "../api/axios";
+import { postReq } from "../../api/axios";
 
 const OTPVerification = () => {
     const { handleSubmit, control, setValue, watch, reset } = useForm({

@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router'
-import { getReq } from '../api/axios';
-import { userDetail, userId } from '../redux/reducers/userSlice';
+import { getReq } from '../../api/axios';
+import { userDetail, userId } from '../../redux/reducers/userSlice';
 import { useEffect } from 'react';
-import { getAllBlogs } from '../redux/reducers/blogSlice';
+import { getAllBlogs } from '../../redux/reducers/blogSlice';
 
-const MainLayout = () => {
+const ApiHandling = () => {
 
-    const token = useSelector(state => state.user.token)
+    const token = useSelector(state => state?.user.token)
 
     const dispatch = useDispatch()
     const getAllUsers = async () => {
@@ -39,4 +39,4 @@ const MainLayout = () => {
     )
 }
 
-export default MainLayout
+export default ApiHandling

@@ -3,6 +3,7 @@ import { RiSearch2Line } from "react-icons/ri";
 import { Link } from 'react-router';
 import { useSelector } from 'react-redux';
 import ProfileDropdown from './common/ProfileDropdown';
+import Sidebar from './common/Sidebar';
 
 const Header = ({ dashboard }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,8 +20,9 @@ const Header = ({ dashboard }) => {
     <>
       {dashboard ?
         <div className="navbar bg-primary justify-between">
-          <div className="pl-12 ">
-            <a className="text-xl md:hidden md:text-[14px] text-secandory px-2">{role === 'admin' ? 'Admin Dashboard' : 'User Dashboard'}</a>
+          <div className="flex gap-2">
+          <Sidebar mobileView />
+            <a className="text-lg md:text-3xl text-secandory px-2">{name}</a>
           </div>
           <div className='max-sm:hidden'>
             <div className="flex justify-between items-center bg-secandory input max-w-80 px-0">
@@ -61,7 +63,7 @@ const Header = ({ dashboard }) => {
           <ProfileDropdown userName={userName} />
         </div>
         :
-        <nav className="bg-primary text-secandory shadow-md sm:px-4">
+        <nav className="bg-primary text-secandory shadow-md">
           <div className="px-3 py-4 flex items-center justify-between gap-3 w-full">
             {/* Hamburger menu for mobile */}
             <div className="flex gap-3">

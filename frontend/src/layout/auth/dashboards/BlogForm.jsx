@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Editor } from "@tinymce/tinymce-react";
-import { postReq } from "../api/axios";
+import { postReq } from "../../../api/axios";
 import { useSelector } from "react-redux";
 
 

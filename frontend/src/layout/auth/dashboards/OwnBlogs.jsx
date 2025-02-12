@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import Card from '../components/common/Card';
+import Card from '../../../components/common/Card';
 import { useState } from "react"
 import { IoGridOutline } from "react-icons/io5";
 import { CiBoxList } from "react-icons/ci";

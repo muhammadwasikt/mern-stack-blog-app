@@ -13,19 +13,18 @@ weatherRoute.post("/update", async (req, res) => {
   }
 
   try {
-    const apiKey = process.env.WEATHER_API_KEY
+    const apiKey = process.env.WEATHER_API_KEY;
     const apiUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${latitude},${longitude}`;
 
     const response = await fetch(apiUrl);
     if (!response.ok) {
-        res.status(400).send({status:400 , message: "Failed to fetch weather data."})
+      return res.status(400).json({ status: 400, message: "Failed to fetch weather data." });
     }
-    const weatherData = await response.json();
 
-    res.status(200).send({status:200 , data: weatherData });
+    const weatherData = await response.json();
+    return res.status(200).json({ status: 200, data: weatherData });
   } catch (error) {
-    console.error("Error fetching weather data:", error.message);
-    res.status(500).json({ error: error.message });
+    console.error("Error fetching weather data:", error);
+    return res.status(500).json({ status: 500, error: "Internal server error." });
   }
 });
-

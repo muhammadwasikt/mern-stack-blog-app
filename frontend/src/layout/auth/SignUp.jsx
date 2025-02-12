@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"
-import { postReq } from "../api/axios"
+import { postReq } from "../../api/axios"
 import { useNavigate } from "react-router"
 import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"

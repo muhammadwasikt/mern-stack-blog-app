@@ -1,8 +1,8 @@
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import CardCarousel from '../components/common/CardCarousel';
-import HeroSection from '../components/common/HeroSection';
-import WeatherUpdate from '../components/common/WeatherUpdate';
+import CardCarousel from '../../components/common/CardCarousel';
+import HeroSection from '../../components/common/HeroSection';
+import WeatherUpdate from '../../components/common/WeatherUpdate';
 
 
 const Home = () => {
