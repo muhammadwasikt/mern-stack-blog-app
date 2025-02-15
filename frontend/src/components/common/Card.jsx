@@ -50,17 +50,17 @@ const Card = ({ file, description, category, title, id, admin, path, date }) => 
             {userName}
           </div>
           <div>
-            <h2 className="card-title text-[14px] font-bold">{name.charAt(0).toUpperCase() + name.slice(1)}</h2>
+            <h2 className="card-title text-[14px] font-bold">{name?.charAt(0).toUpperCase() + name?.slice(1)}</h2>
             <p className='text-[10px]'>{timeAgo}</p>
           </div>
         </div>
         <div className='flex gap-1 items-center h-24'>
           <img src={file} className='object-contain h-20' />
-          <h2 className="card-title text-[14px] font-bold">{title.slice(0, 40)}...</h2>
+          <h2 className="card-title text-[14px] font-bold">{title?.slice(0, 40)}...</h2>
         </div>
         <p dangerouslySetInnerHTML={description} className='h-[70px] overflow-hidden'>
         </p>
-        <p className='bottom-1 font-bold'>{category.slice(0, 25)}...</p>
+        <p className='bottom-1 font-bold'>{category?.slice(0, 25)}...</p>
         <div className="card-actions justify-between">
           <div className="flex gap-3 items-center p-2">
             {admin && <><MdOutlineDelete className="text-xl" title="Delete" />
