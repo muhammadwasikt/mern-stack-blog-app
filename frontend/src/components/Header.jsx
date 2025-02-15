@@ -19,10 +19,10 @@ const Header = ({ dashboard }) => {
   return (
     <>
       {dashboard ?
-        <div className="navbar bg-primary justify-between">
+        <div className="navbar bg-primary justify-between border">
           <div className="flex gap-2">
           <Sidebar mobileView />
-            <a className="text-lg md:text-3xl text-secandory px-2">{name}</a>
+            <a className="text-lg md:text-3xl text-secandory px-2">{name.toUpperCase()}</a>
           </div>
           <div className='max-sm:hidden'>
             <div className="flex justify-between items-center bg-secandory input max-w-80 px-0">

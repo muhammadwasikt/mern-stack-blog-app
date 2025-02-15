@@ -1,23 +1,62 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdOutlineDelete } from "react-icons/md";
 import { AiOutlineEdit } from "react-icons/ai";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 
-const Card = ({ file, description, category, title, id, admin , path }) => {
+const Card = ({ file, description, category, title, id, admin, path, date }) => {
 
+  const [timeAgo, setTimeAgo] = useState('');
   const navigate = useNavigate()
-
+  const user = useSelector(state => state.user.userId)
+  const { name } = user
+  const userName = name?.replace('.', '').slice(0, 2).toUpperCase()
   const handleBlogDetail = (id) => {
     navigate(`/${path}/${id}`);
   };
+
+  useEffect(() => {
+    const calculateTimeAgo = () => {
+      const currentTime = new Date();
+      const postTime = new Date(date);
+      const diffInSeconds = Math.floor((currentTime - postTime) / 1000);
+
+      if (diffInSeconds < 60) {
+        setTimeAgo('now');
+      } else if (diffInSeconds < 3600) {
+        setTimeAgo(`${Math.floor(diffInSeconds / 60)} min ago`);
+      } else if (diffInSeconds < 86400) {
+        setTimeAgo(`${Math.floor(diffInSeconds / 3600)} hour ago`);
+      } else if (diffInSeconds < 86400 * 2) {
+        setTimeAgo('1 day ago');
+      } else {
+        setTimeAgo(postTime.toLocaleDateString());
+      }
+    };
+
+    calculateTimeAgo();
+
+    const interval = setInterval(calculateTimeAgo, 60000); // Update every minute
+    return () => clearInterval(interval);
+  }, [date]);
+
   return (
     <div
       className="card shadow-md hover:shadow-xl hover:scale-105 border"
     >
-      <div className="card-body px-3">
-        <div className='flex gap-1 items-center'>
+      <div className="card-body px-3 pt-2">
+        <div className='flex gap-1 items-center h-14'>
+          <div className="w-12 h-12 bg-gray-200 rounded-full flex justify-center items-center avatar online border">
+            {userName}
+          </div>
+          <div>
+            <h2 className="card-title text-[14px] font-bold">{name.charAt(0).toUpperCase() + name.slice(1)}</h2>
+            <p className='text-[10px]'>{timeAgo}</p>
+          </div>
+        </div>
+        <div className='flex gap-1 items-center h-24'>
           <img src={file} className='object-contain h-20' />
-          <h2 className="card-title text-[16px]">{title.slice(0, 40)}...</h2>
+          <h2 className="card-title text-[14px] font-bold">{title.slice(0, 40)}...</h2>
         </div>
         <p dangerouslySetInnerHTML={description} className='h-[70px] overflow-hidden'>
         </p>

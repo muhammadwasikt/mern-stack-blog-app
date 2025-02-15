@@ -4,11 +4,15 @@ import Card from "../../../components/common/Card";
 
 const BlogList = () => {
 
-  const blogs = useSelector((state) => state.blog.blogs);
+  const blog = useSelector((state) => state.blog.blogs);
   const user = useSelector((state) => state.user.userId);
+  let blogs = [];
+  blog?.forEach((element) => {
+    blogs.unshift(element);
+  });
 
   const [currentPage, setCurrentPage] = useState(1);
-  const blogsPerPage = 5;
+  const blogsPerPage = 8;
 
   const indexOfLastBlog = currentPage * blogsPerPage;
   const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
@@ -39,7 +43,7 @@ const BlogList = () => {
       <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
         {currentBlogs?.reverse().map((data, index) => (
           <Card
-            key={data?._id || index} // Use a unique key (preferably _id)
+            key={data?._id || index}
             file={data?.file[0]}
             description={{ __html: data?.description }}
             category={data?.category}
@@ -47,6 +51,7 @@ const BlogList = () => {
             id={data?._id}
             admin={user?.role === "admin"}
             path='blog-detail'
+            date={data?.updatedAt}
           />
         ))}
       </div>

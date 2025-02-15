@@ -4,13 +4,14 @@ import { Autoplay } from 'swiper/modules';
 import Card from './Card';
 
 const CardCarousel = ({ blogList }) => {
+
     return (
         <Swiper
             modules={[Autoplay]}
             spaceBetween={30}
             slidesPerView={1}
             autoplay={{
-                delay: 5000, 
+                delay: 5000,
                 disableOnInteraction: false,
             }}
             breakpoints={{
@@ -24,9 +25,9 @@ const CardCarousel = ({ blogList }) => {
                     slidesPerView: 3,
                 },
             }}
-            loop={true} 
+            loop={true}
         >
-            {blogList?.map((data, index) => (
+            {blogList?.slice(0, 5).map((data, index) => (
                 <SwiperSlide key={index}>
                     <Card
                         key={index}
@@ -34,8 +35,8 @@ const CardCarousel = ({ blogList }) => {
                         description={{ __html: data?.description }}
                         category={data?.category}
                         title={data?.title}
-                        id={data?._id} 
-                        path='blog-detail'/>
+                        id={data?._id}
+                        path='blog-detail' />
                 </SwiperSlide>
             ))}
         </Swiper>

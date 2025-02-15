@@ -1,17 +1,19 @@
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector} from 'react-redux';
 import CardCarousel from '../../components/common/CardCarousel';
 import HeroSection from '../../components/common/HeroSection';
 import WeatherUpdate from '../../components/common/WeatherUpdate';
 
 
 const Home = () => {
+
   const user = useSelector(state => state.user.userId);
   const blogs = useSelector(state => state.blog.blogs)
   let blogList = []
   blogs?.slice(0, 5).forEach(element => {
     blogList.unshift(element)
   });
+
   return (
     <div>
       {/* Hero Section */}

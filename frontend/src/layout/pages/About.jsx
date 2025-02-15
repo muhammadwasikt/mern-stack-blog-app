@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 
 const About = () => {
 
+  const user = useSelector(state => state.user.userId);
   const navigate = useNavigate()
   return (
     <div className="bg-base-100 text-base-content py-10 px-6 lg:px-20">
@@ -67,14 +69,15 @@ const About = () => {
       </div>
 
       {/* Join Section */}
-      <div className="my-10 text-center">
+      {!user &&
+        <div className="my-10 text-center">
         <h2 className="text-3xl font-semibold mb-4">Join Our Community</h2>
         <p className="text-gray-600 mb-6">
           Whether you're an experienced blogger or just starting out, <strong>BLOG BUSTER</strong> is the perfect place for you.
           Let your words make an impact.
         </p>
         <button className="btn bg-primary px-8 text-secandory" onClick={()=>navigate('/auth/sign-up')}>Sign Up Now</button>
-      </div>
+      </div>}
     </div>
   );
 };

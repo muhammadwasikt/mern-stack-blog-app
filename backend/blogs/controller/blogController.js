@@ -24,12 +24,13 @@ const addBlog = async (req, res) => {
         }
 
         const { title, description, category, author } = req.body;
-        const path = req.file.path; 
+        const path = req?.file?.path; 
         const response = await Blog.create({
             title,
             description,
             category,
-            file: path,  
+            file: path, 
+            filePublicId: req?.file?.filename,
             author,
         });
 
@@ -39,9 +40,53 @@ const addBlog = async (req, res) => {
     }
 };
 
+const updateBlog = async (req, res) => {
+      const blogId = req.params.id;
+      const { title, description, category, author } = req.body;
+  
+      const newFile = req.file?.path;
+      const newFilePublicId = req.file?.filename;
+  
+      try {
+        const blog = await Blog.findById(blogId);
+  
+        if (!blog) {
+          return res.status(404).send({ message: "Blog not found" });
+        }
+  
+        // Delete old file from Cloudinary if a new one is uploaded
+        if (newFile && blog.filePublicId) {
+          await cloudinary.uploader.destroy(blog.filePublicId);
+        }
+  
+        // Update blog
+        const updatedBlog = await Blog.findByIdAndUpdate(
+          blogId,
+          {
+            title: title || blog.title,
+            description: description || blog.description,
+            category: category || blog.category,
+            author: author || blog.author,
+            file: newFile || blog.file,
+            filePublicId: newFilePublicId || blog.filePublicId,
+          },
+          { new: true }
+        );
+  
+        res.status(200).send({ message: "Blog updated successfully", updatedBlog });
+      } catch (error) {
+        res.status(500).send({ message: "Error updating blog", error: error.message });
+      }
+    }
+
 const deleteBlog = async (req, res) => {
     try {
         const { id } = req.params
+        const file = await Blog.findById(id);
+
+        if (file?.filePublicId) {
+            await cloudinary.uploader.destroy(file?.filePublicId);
+        }
         const blog = await Blog.findByIdAndDelete(id);
         if (!blog) {
             return res.status(404).send({ status: 404, message: "Blog not found" })
@@ -65,4 +110,4 @@ const deleteAllBlogs = async (req, res) => {
 
 
 
-export { getBlog, addBlog, deleteAllBlogs , deleteBlog }
+export { getBlog, addBlog, deleteAllBlogs , deleteBlog , updateBlog}
