@@ -9,6 +9,9 @@ const getReq = async (path) => {
         return response.data.data;
     } catch (error) {
         console.error(`Error fetching data: ${error.message}`);
+        if (error?.message === 'timeout of 9000ms exceeded') {
+            toast.error("Slow or no internet connection")
+        }
     }
 }
 

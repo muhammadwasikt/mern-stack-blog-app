@@ -27,7 +27,8 @@ const CardCarousel = ({ blogList }) => {
             }}
             loop={true}
         >
-            {blogList?.slice(0, 5).map((data, index) => (
+            {blogList?.slice(0, 5).map((data, index) => 
+            (                
                 <SwiperSlide key={index}>
                     <Card
                         key={index}
@@ -36,6 +37,8 @@ const CardCarousel = ({ blogList }) => {
                         category={data?.category}
                         title={data?.title}
                         id={data?._id}
+                        date={data?.createdAt}
+                        author={data?.author}
                         path='blog-detail' />
                 </SwiperSlide>
             ))}

@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import UserReducer from './reducers/userSlice.js'
 import BlogReducer from './reducers/blogSlice.js'
+import WeatherReducer from './reducers/weatherSlice.js'
 
 
 
@@ -14,6 +15,7 @@ const persistConfig = {
 const combineReducer = combineReducers({
     user: UserReducer,
     blog: BlogReducer,
+    weather: WeatherReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, combineReducer);

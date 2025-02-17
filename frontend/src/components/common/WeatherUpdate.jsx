@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { postReq } from "../../api/axios";
+import { useDispatch, useSelector } from "react-redux";
+import { addWeatherData } from "../../redux/reducers/weatherSlice";
 
 
 const WeatherUpdate = () => {
 
-  const [response, setResponse] = useState();
+  const dispatch = useDispatch()
+  const response = useSelector(state => state?.weather.weatherData)
+  
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -23,7 +27,7 @@ const WeatherUpdate = () => {
   const fetchWeatherData = async (latitude, longitude) => {
     const response = await postReq('/weather/update', { latitude: latitude, longitude: longitude })
     if (response) {
-      setResponse(response);      
+      dispatch(addWeatherData(response))      
     }
   }
   return (

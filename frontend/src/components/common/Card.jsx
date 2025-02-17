@@ -4,13 +4,11 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 
-const Card = ({ file, description, category, title, id, admin, path, date }) => {
+const Card = ({ file, description, category, title, id, admin, path, date , author }) => {
 
   const [timeAgo, setTimeAgo] = useState('');
   const navigate = useNavigate()
-  const user = useSelector(state => state.user.userId)
-  const { name } = user
-  const userName = name?.replace('.', '').slice(0, 2).toUpperCase()
+  const userName = author?.replace('.', '').slice(0, 2).toUpperCase()
   const handleBlogDetail = (id) => {
     navigate(`/${path}/${id}`);
   };
@@ -36,7 +34,7 @@ const Card = ({ file, description, category, title, id, admin, path, date }) => 
 
     calculateTimeAgo();
 
-    const interval = setInterval(calculateTimeAgo, 60000); // Update every minute
+    const interval = setInterval(calculateTimeAgo, 60000); 
     return () => clearInterval(interval);
   }, [date]);
 
@@ -50,7 +48,7 @@ const Card = ({ file, description, category, title, id, admin, path, date }) => 
             {userName}
           </div>
           <div>
-            <h2 className="card-title text-[14px] font-bold">{name?.charAt(0).toUpperCase() + name?.slice(1)}</h2>
+            <h2 className="card-title text-[14px] font-bold">{author?.charAt(0).toUpperCase() + author?.slice(1)}</h2>
             <p className='text-[10px]'>{timeAgo}</p>
           </div>
         </div>

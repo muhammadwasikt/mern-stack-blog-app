@@ -23,7 +23,7 @@ const OwnBlogs = () => {
           <h1 className="text-3xl font-bold">Welcome, {user?.name}</h1>
         </div>
         {filterBlogs?.length > 0 && <div className="max-lg:hidden absolute right-4 top-[70px]">
-          <button onClick={() => setGridView(!gridView)} className="btn ">{gridView ? (
+          <button onClick={() => setGridView(!gridView)} className="btn ">{!gridView ? (
             <IoGridOutline title="Grid View" className="text-2xl" />
           ) : (
             <CiBoxList title="List View" className="text-2xl" />
@@ -42,6 +42,8 @@ const OwnBlogs = () => {
                   category={data?.category}
                   title={data?.title}
                   id={data?._id}
+                  date={data?.createdAt}
+                  author={data?.author}
                   path='auth/blog-detail'
                   admin />
               ))

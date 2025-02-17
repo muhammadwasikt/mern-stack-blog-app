@@ -29,7 +29,7 @@ const ApiHandling = () => {
         if (token?.length > 0 || token ) {
             getUserDetail()
         }
-    }, [token])
+    }, [token , getBlogs , getAllUsers , getUserDetail])
     
     return (
         <div>
