@@ -9,10 +9,7 @@ const LoadingScreen = ({ children }) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (blogs.length > 0) {
         setLoading(false);
-        toast.success("Data loaded successfully");
-      }
     }, 5000);
     
     return () => clearTimeout(timer);
