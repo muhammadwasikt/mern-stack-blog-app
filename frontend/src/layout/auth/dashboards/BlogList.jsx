@@ -63,11 +63,7 @@ const BlogList = () => {
 
       {/* Pagination */}
       <div className="flex justify-center gap-1 items-center mt-8">
-<<<<<<< HEAD
-        <div className="flex justify-center gap-1">
-=======
         {blogs.length > 0  ? <div className="flex justify-center gap-1">
->>>>>>> 938d8ba (update)
           {/* Previous Button */}
           <button
             className="btn btn-sm"
@@ -96,12 +92,8 @@ const BlogList = () => {
           >
             »
           </button>
-<<<<<<< HEAD
-        </div>
-=======
         </div> : 
         <div></div>}
->>>>>>> 938d8ba (update)
       </div>
     </div>
   );

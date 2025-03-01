@@ -7,11 +7,7 @@ dotenv.config();
 export const sendResetEmail = async (email, url) => {
     try {
         transporter.sendMail({
-<<<<<<< HEAD
-            from: process.env.SENDER_EMAIL,
-=======
             from: process.env.SMTP_USER,
->>>>>>> 938d8ba (update)
             to: email,
             subject: 'Password Reset Request',
             text: 'Click the link below to reset your password.',
@@ -32,11 +28,7 @@ export const sendResetEmail = async (email, url) => {
 export const sendEmailVerification = async (email, otp , token) => {
     try {
         transporter.sendMail({
-<<<<<<< HEAD
-            from: process.env.SENDER_EMAIL,
-=======
             from: process.env.SMTP_USER,
->>>>>>> 938d8ba (update)
             to: email,
             subject: 'Email Verification',
             html: `
