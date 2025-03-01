@@ -83,7 +83,7 @@ const SignUp = () => {
                 </label>
                 {errors.password && <span>This field is required</span>}
 
-                <button type="submit" className="btn w-full py-3 bg-primary text-secandory">{loading ? 'Loading...':'SIGN UP'}</button>
+                <button type="submit" className="btn w-full py-3 bg-primary text-secandory" disabled={loading}>{loading ? 'Loading...':'SIGN UP'}</button>
                 <p className="text-center mt-4 flex justify-center gap-1 text-sm items-center">Already have an account? <span className="text-blue-500 cursor-pointer text-[16px]" onClick={() => navigate('/auth/sign-in')}>Sign In</span></p>
             </form>
         </div>

@@ -82,7 +82,7 @@ const SignIn = () => {
 
                 <Link to='/forgot-password' className="text-sm text-blue-600 hover:underline text-right" >Forgot Password</Link>
 
-                <button type="submit" className="btn w-full py-3 bg-primary text-secandory">{loader ? 'Loading...' : 'SIGN IN'}</button>
+                <button type="submit" className="btn w-full py-3 bg-primary text-secandory" disabled={loader}>{loader ? 'Loading...' : 'SIGN IN'}</button>
                 <p className="text-center mt-4 flex justify-center gap-1 text-sm items-center">Don't have an account: <span className="text-blue-500 cursor-pointer text-[16px]" onClick={() => navigate('/auth/sign-up')}>Sign Up</span></p>
             </form>
         </div>

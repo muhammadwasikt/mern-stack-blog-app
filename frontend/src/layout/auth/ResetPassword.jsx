@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { postReq } from "../../api/axios";
 import { useNavigate, useParams } from "react-router";
+import { useState } from "react";
 
 const ResetPassword = () => {
     const {
@@ -12,10 +13,11 @@ const ResetPassword = () => {
     } = useForm();
     const navigate = useNavigate()
     const {token} = useParams()
+    const [loading, setLoading] = useState(false)
 
     const onSubmit = async (data) => {
         const { password, confirmPassword } = data
-
+        setLoading(true)
         if (password!== confirmPassword) {
             toast.error("Passwords do not match.");
             reset()
@@ -93,8 +95,9 @@ const ResetPassword = () => {
                     <button
                         type="submit"
                         className="btn bg-primary w-full mt-6"
+                        disabled={loading}
                     >
-                        Reset Password
+                        {loading ? "Loading...":"Reset Password"}
                     </button>
                 </form>
 

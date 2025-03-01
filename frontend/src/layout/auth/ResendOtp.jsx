@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
-import { Link , useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { postReq } from "../../api/axios";
+import { useState } from "react";
 
 
 
@@ -11,13 +12,14 @@ const ResendOtp = () => {
         formState: { errors },
         reset,
     } = useForm();
-
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
+
     const onSubmit = async (data) => {
-       
-        const response = await postReq('/user/resend-otp',data)
+        setLoading(true)
+        const response = await postReq('/user/resend-otp', data)
         if (response) {
-            navigate(`/email-verification/${response.token}`) 
+            navigate(`/email-verification/${response.token}`)
         }
         reset()
     };
@@ -61,8 +63,9 @@ const ResendOtp = () => {
                     <button
                         type="submit"
                         className="btn bg-primary w-full mt-4"
+                        disabled={loading}
                     >
-                        Send New Otp
+                        {loading ? "Loading..." : "Send New Otp"}
                     </button>
                 </form>
 

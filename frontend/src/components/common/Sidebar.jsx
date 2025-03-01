@@ -29,11 +29,7 @@ const Sidebar = ({ mobileView }) => {
                                     Add New Blog
                                 </label>
                             </li>
-<<<<<<< HEAD
-                            {role === 'admin' && <li className="text-xl hover:bg-secandory hover:text-black w-full rounded-xl"><label htmlFor="my-drawer" aria-label="close sidebar" onClick={() => navigate('/all-users')}>
-=======
                             {role === 'Admin' && <li className="text-xl hover:bg-secandory hover:text-black w-full rounded-xl"><label htmlFor="my-drawer" aria-label="close sidebar" onClick={() => navigate('/all-users')}>
->>>>>>> 938d8ba (update)
                                 Users List
                             </label></li>}
                             {role === 'user' ? <li className="text-xl hover:bg-secandory hover:text-black w-full rounded-xl"><label htmlFor="my-drawer" aria-label="close sidebar" onClick={() => navigate('/my-blogs')}>
@@ -54,11 +50,7 @@ const Sidebar = ({ mobileView }) => {
                         {/* Sidebar content here */}
                         <li className="text-xl hover:bg-secandory hover:text-black w-full rounded-xl"><Link to='/auth/dashboard'>Dashboard</Link></li>
                         <li className="text-xl hover:bg-secandory hover:text-black w-full rounded-xl"><Link to='/blog/add'>Add New Blog</Link></li>
-<<<<<<< HEAD
-                        {role === 'admin' && <li className="text-xl hover:bg-secandory hover:text-black w-full rounded-xl"><Link to='/all-users'>Users List</Link></li>}
-=======
                         {role === 'Admin' && <li className="text-xl hover:bg-secandory hover:text-black w-full rounded-xl"><Link to='/all-users'>Users List</Link></li>}
->>>>>>> 938d8ba (update)
                         {role === 'user' ? <li className="text-xl hover:bg-secandory hover:text-black w-full rounded-xl"><label htmlFor="my-drawer" aria-label="close sidebar" onClick={() => navigate('/my-blogs')}>
                             My Blogs
                         </label></li>

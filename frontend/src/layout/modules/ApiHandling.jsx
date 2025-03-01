@@ -1,40 +1,37 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { getReq } from '../../api/axios';
 import { userDetail, userId } from '../../redux/reducers/userSlice';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { getAllBlogs } from '../../redux/reducers/blogSlice';
 
 const ApiHandling = () => {
+    const token = useSelector(state => state?.user.token);
+    const dispatch = useDispatch();
 
-    const token = useSelector(state => state?.user.token)
-
-    const dispatch = useDispatch()
-    const getAllUsers = async () => {
+    const getAllUsers = useCallback(async () => {
         const response = await getReq('/user');
-        dispatch(userDetail(response))
-    }
-    const getBlogs = async () => {
+        dispatch(userDetail(response));
+    }, [dispatch]);
+
+    const getBlogs = useCallback(async () => {
         const response = await getReq('/blog');
-        dispatch(getAllBlogs(response))
-    }
-    const getUserDetail = async () => {
-        const userResponse = await getReq('/user/protected-route')
+        dispatch(getAllBlogs(response));
+    }, [dispatch]);
+
+    const getUserDetail = useCallback(async () => {
+        const userResponse = await getReq('/user/protected-route');
         dispatch(userId(userResponse));
-    }
-    
+    }, [dispatch]);
 
     useEffect(() => {
         getAllUsers();
         getBlogs();
-        if (token?.length > 0 || token ) {
-            getUserDetail()
+        if (token?.length > 0) {
+            getUserDetail();
         }
-    }, [token , getBlogs , getAllUsers , getUserDetail])
-    
-    return (
-        <div>
-        </div>
-    )
-}
+    }, [token, getAllUsers, getBlogs, getUserDetail]); 
 
-export default ApiHandling
+    return <div></div>;
+};
+
+export default ApiHandling;

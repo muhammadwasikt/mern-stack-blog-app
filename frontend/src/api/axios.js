@@ -11,10 +11,7 @@ const getReq = async (path) => {
         console.error(`Error fetching data: ${error.message}`);
         if (error?.message === 'timeout of 9000ms exceeded') {
             toast.error("Slow or no internet connection")
-<<<<<<< HEAD
-=======
             location.reload()
->>>>>>> 938d8ba (update)
         }
     }
 }

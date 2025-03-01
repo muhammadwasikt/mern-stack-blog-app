@@ -1,8 +1,10 @@
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate, useParams } from "react-router";
 import { postReq } from "../../api/axios";
+import { useState } from "react";
 
 const OTPVerification = () => {
+    const [loading, setLoading] = useState(false);
     const { handleSubmit, control, setValue, watch, reset } = useForm({
         defaultValues: {
             otp: ["", "", "", "", "", ""], // 6 input fields for OTP
@@ -14,8 +16,8 @@ const OTPVerification = () => {
     const navigate = useNavigate()
 
     const onSubmit = async (data) => {
+        setLoading(true);
         const otpCode = data.otp.join("");
-        
         const response = await postReq(`/user/email-verification/${token}`, {emailOtp:otpCode})
         reset()
         console.log(response);
@@ -106,8 +108,8 @@ const OTPVerification = () => {
                     </div>
 
                     {/* Submit Button */}
-                    <button type="submit" className="btn bg-primary w-full">
-                        Verify
+                    <button type="submit" className="btn bg-primary w-full" disabled={loading}>
+                        {!loading ? "Verify" : "Loading..."}
                     </button>
                 </form>
 

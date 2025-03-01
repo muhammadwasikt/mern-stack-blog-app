@@ -2,15 +2,7 @@ import { useEffect, useState } from "react";
 import { MdOutlineDelete } from "react-icons/md";
 import { AiOutlineEdit } from "react-icons/ai";
 import { useNavigate } from "react-router";
-<<<<<<< HEAD
-import { useSelector } from "react-redux";
-
-const Card = ({ file, description, category, title, id, admin, path, date , author }) => {
-
-  const [timeAgo, setTimeAgo] = useState('');
-  const navigate = useNavigate()
-=======
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { deletReq } from "../../api/axios";
 import { deleteBlog } from "../../redux/reducers/blogSlice";
 
@@ -19,21 +11,17 @@ const Card = ({ file, description, category, title, id, admin, path, date, autho
   const [timeAgo, setTimeAgo] = useState('');
   const navigate = useNavigate()
   const dispatch = useDispatch();
->>>>>>> 938d8ba (update)
   const userName = author?.replace('.', '').slice(0, 2).toUpperCase()
   const handleBlogDetail = (id) => {
     navigate(`/${path}/${id}`);
   };
 
-<<<<<<< HEAD
-=======
   const handleDeleteBlog = async (id) => {
     await deletReq(`/blog/delete/${id}`)
     dispatch(deleteBlog(id));
   }
 
 
->>>>>>> 938d8ba (update)
   useEffect(() => {
     const calculateTimeAgo = () => {
       const currentTime = new Date();
@@ -55,11 +43,7 @@ const Card = ({ file, description, category, title, id, admin, path, date, autho
 
     calculateTimeAgo();
 
-<<<<<<< HEAD
-    const interval = setInterval(calculateTimeAgo, 60000); 
-=======
     const interval = setInterval(calculateTimeAgo, 60000);
->>>>>>> 938d8ba (update)
     return () => clearInterval(interval);
   }, [date]);
 
@@ -86,11 +70,7 @@ const Card = ({ file, description, category, title, id, admin, path, date, autho
         <p className='bottom-1 font-bold'>{category?.slice(0, 25)}...</p>
         <div className="card-actions justify-between">
           <div className="flex gap-3 items-center p-2">
-<<<<<<< HEAD
-            {admin && <><MdOutlineDelete className="text-xl" title="Delete" />
-=======
             {admin && <><MdOutlineDelete className="text-xl" title="Delete" onClick={()=>handleDeleteBlog(id)}/>
->>>>>>> 938d8ba (update)
               <AiOutlineEdit className="text-xl" title="Edit" /></>}
           </div>
           <label className="btn" onClick={() => handleBlogDetail(id)}>Read More</label>
