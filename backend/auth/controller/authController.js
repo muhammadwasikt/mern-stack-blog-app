@@ -5,7 +5,7 @@ import crypto from "crypto"
 import { sendEmailVerification, sendResetEmail } from "../../gmail/email.js"
 
 
-
+        
 
 const secret = process.env.JWT_SECRET_KEY
 
@@ -41,8 +41,8 @@ const register = async (req, res) => {
             return res.status(400).send({ status: 400, message: "Password must be at least 8 characters long" });
         }
 
-        const otpId = Math.floor(Math.random() * Date.now().toString());
-        const otp = otpId.slice(0, 6)
+        const otpId = Math.floor(Math.random() * Date.now());
+        const otp = otpId?.toString().slice(0,6)
         const otpExpiresAt = Date.now() + 1 * 60 * 60 * 1000;
 
         if (otp < 6) {
@@ -82,8 +82,8 @@ const resendOtp = async (req, res) => {
             return res.status(404).send({ status: 404, message: "Email is already verified" });
         }
 
-        const otpId = Math.floor(Math.random() * Date.now().toString());
-        const otp = otpId.slice(0, 6)
+        const otpId = Math.floor(Math.random() * Date.now());
+        const otp = otpId?.toString().slice(0,6)
         const otpExpiresAt = Date.now() + 1 * 60 * 60 * 1000;
 
         if (otp < 6) {
