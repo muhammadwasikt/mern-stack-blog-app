@@ -41,9 +41,8 @@ const register = async (req, res) => {
             return res.status(400).send({ status: 400, message: "Password must be at least 8 characters long" });
         }
 
-        // generate OTP
-        const otpId = Date.now().toString();
-        const otp = otpId.slice(3, 9)
+        const otpId = Math.floor(Math.random() * Date.now().toString());
+        const otp = otpId.slice(0, 6)
         const otpExpiresAt = Date.now() + 1 * 60 * 60 * 1000;
 
         if (otp < 6) {
@@ -65,7 +64,6 @@ const register = async (req, res) => {
 
         sendEmailVerification(email, otp, token)
 
-        // create new user
         const response = await User.create(data)
         res.status(201).send({ status: 201, message: "User registered successfully", data: response })
     } catch (error) {
@@ -75,7 +73,7 @@ const register = async (req, res) => {
 
 const resendOtp = async (req, res) => {
     try {
-        const {email} = req.body;
+        const { email } = req.body;
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(404).send({ status: 404, message: "User not found" });
@@ -84,14 +82,8 @@ const resendOtp = async (req, res) => {
             return res.status(404).send({ status: 404, message: "Email is already verified" });
         }
 
-        // generate OTP
-<<<<<<< HEAD
-        const otpId = Date.now().toString();
-        const otp = otpId.slice(3, 9)
-=======
         const otpId = Math.floor(Math.random() * Date.now().toString());
         const otp = otpId.slice(0, 6)
->>>>>>> 938d8ba (update)
         const otpExpiresAt = Date.now() + 1 * 60 * 60 * 1000;
 
         if (otp < 6) {
@@ -127,7 +119,7 @@ const login = async (req, res) => {
         if (existingUser.emailVerified === false) {
             return res.status(404).send({ status: 404, message: "Email not verified" });
         }
-        const token = jwt.sign({ id: existingUser._id , name: existingUser.name , role: existingUser.role}, secret);
+        const token = jwt.sign({ id: existingUser._id, name: existingUser.name, role: existingUser.role }, secret);
 
         res.status(200).send({ status: 200, message: "Login Successfully", data: token });
     } catch (err) {
@@ -265,4 +257,4 @@ const protect = (req, res) => {
 
 
 
-export { getUser,resendOtp , deleteAllUser, register, login, forgotPassword, deleteUser, resetPassword, protect, emailVerification }
+export { getUser, resendOtp, deleteAllUser, register, login, forgotPassword, deleteUser, resetPassword, protect, emailVerification }
