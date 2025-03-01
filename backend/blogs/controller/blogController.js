@@ -91,7 +91,11 @@ const deleteBlog = async (req, res) => {
         if (!blog) {
             return res.status(404).send({ status: 404, message: "Blog not found" })
         };
+<<<<<<< HEAD
         res.status(200).send({ status: 200, message: "blog deleted successfully", data: blog })
+=======
+        res.status(200).send({ status: 200, message: "blog deleted successfully" })
+>>>>>>> 938d8ba (update)
     } catch (error) {
         return res.status(error.status).send({ status: error.status, message: error.message })
     }

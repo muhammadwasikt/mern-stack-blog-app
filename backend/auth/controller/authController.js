@@ -85,8 +85,13 @@ const resendOtp = async (req, res) => {
         }
 
         // generate OTP
+<<<<<<< HEAD
         const otpId = Date.now().toString();
         const otp = otpId.slice(3, 9)
+=======
+        const otpId = Math.floor(Math.random() * Date.now().toString());
+        const otp = otpId.slice(0, 6)
+>>>>>>> 938d8ba (update)
         const otpExpiresAt = Date.now() + 1 * 60 * 60 * 1000;
 
         if (otp < 6) {

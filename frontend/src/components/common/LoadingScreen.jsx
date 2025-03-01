@@ -10,12 +10,17 @@ const LoadingScreen = ({ children }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
         setLoading(false);
+<<<<<<< HEAD
     }, 5000);
+=======
+    }, 2000);
+>>>>>>> 938d8ba (update)
     
     return () => clearTimeout(timer);
   }, [blogs]);
 
   return (
+<<<<<<< HEAD
     <div className={`relative h-screen ${loading ? "overflow-hidden" : "overflow-auto"}`}>
       {/* Content in the background */}
       <div className={`transition-opacity duration-500 ${loading ? "opacity-[50]" : "opacity-100"}`}>
@@ -31,6 +36,19 @@ const LoadingScreen = ({ children }) => {
           </div>
         </div>
       )}
+=======
+    <div>
+      {loading ?
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50 ">
+          <div className="relative flex items-center justify-center">
+            <div className="absolute w-[130px] h-[130px] border-4 border-gray-300 border-t-blue-500 animate-spin rounded-full"></div>
+            <img src={logo} alt="Loading..." className="w-[125px] h-[125px] object-fill rounded-full" />
+          </div>
+        </div>
+        :
+        <>{children}</>
+      }
+>>>>>>> 938d8ba (update)
     </div>
   );
 };

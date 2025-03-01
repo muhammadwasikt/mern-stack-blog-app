@@ -22,7 +22,11 @@ const OwnBlogs = () => {
         <div className="w-full">
           <h1 className="text-3xl font-bold">Welcome, {user?.name}</h1>
         </div>
+<<<<<<< HEAD
         {filterBlogs?.length > 0 && <div className="max-lg:hidden absolute right-4 top-[70px]">
+=======
+        {filterBlogs?.length > 0 && <div className="max-lg:hidden right-4 top-[70px] ">
+>>>>>>> 938d8ba (update)
           <button onClick={() => setGridView(!gridView)} className="btn ">{!gridView ? (
             <IoGridOutline title="Grid View" className="text-2xl" />
           ) : (
